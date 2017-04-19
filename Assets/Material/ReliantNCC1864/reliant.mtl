@@ -1,0 +1,294 @@
+# Blender MTL File: 'untitled383.blend'
+# Material Count: 25
+
+newmtl Material.002
+Ns 94.117647
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd reltop.jpg
+
+newmtl RelMainMaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd reltop.jpg
+
+newmtl RelMainMaterial_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl RelMainMaterial_relback1.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relback1.jpg
+
+newmtl RelMainMaterial_relback2.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relback2.jpg
+
+newmtl RelMainMaterial_relblue1.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relblue1.jpg
+
+newmtl RelMainMaterial_relblue3.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relblue3.jpg
+
+newmtl RelMainMaterial_relbottom.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relbottom.jpg
+
+newmtl RelMainMaterial_relgray.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relgray.jpg
+
+newmtl RelMainMaterial_relred.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relred.jpg
+
+newmtl RelMainMaterial_relside1.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relside1.jpg
+
+newmtl RelMainMaterial_relside3.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relside3.jpg
+
+newmtl RelMainMaterial_reltop1.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd reltop1.jpg
+
+newmtl RelMainMaterial_reltop2.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd reltop2.jpg
+
+newmtl RelMainMaterial_reltop3.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd reltop3.jpg
+
+newmtl RelMainMaterial_relyellow.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd relyellow.jpg
+
+newmtl relback3material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relback3.jpg
+map_Ka  relback3.jpg
+map_Ke  relback3.jpg
+
+newmtl relgreenmaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relgreen.jpg
+map_Ka  relgreen.jpg
+map_Ke  relgreen.jpg
+
+newmtl relredmaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relred.jpg
+map_Ka  relred.jpg
+map_Ke  relred.jpg
+
+newmtl relside3material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relside3.jpg
+map_Ka  relside3.jpg
+map_Ke  relside3.jpg
+
+newmtl relside3material_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Ka  relside3.jpg
+map_Kd  relside3.jpg
+map_Ke  relside3.jpg
+
+newmtl reltop4material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd reltop4.jpg
+map_Ka  reltop4.jpg
+map_Ke  reltop4.jpg
+
+newmtl relwhitemat
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relwhite.jpg
+map_Ka  relwhite.jpg
+map_Ke  relwhite.jpg
+
+newmtl relwhitemat_reltop
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd reltop.jpg
+map_Ka  relwhite.jpg
+map_Ke  relwhite.jpg
+
+newmtl relyellow1material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd relyellow1.jpg
+map_Ka  relyellow1.jpg
+map_Ke  relyellow1.jpg
