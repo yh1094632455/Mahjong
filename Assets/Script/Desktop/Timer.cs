@@ -11,21 +11,21 @@ namespace com.Desktop
 
         public Image image;
 
-        public int time;
+        public int time = 10;
 
         public void Show()
         {
             image.enabled = true;
-            StartCoroutine(ShowTimer());
+            StartCoroutine(ShowTimer(time));
         }
 
-        private IEnumerator ShowTimer()
+        private IEnumerator ShowTimer(int time)
         {
             if (time <= 0)
             {
                 //ActiveNext;
                 Hide();
-                PhotonNetwork.RaiseEvent(5, null, true, null);
+                //PhotonNetwork.RaiseEvent(5, null, true, null);
                 yield break;
             }
 
@@ -34,7 +34,7 @@ namespace com.Desktop
             this.transform.Rotate(new Vector3(0, 0, 1));
             time--;
 
-            StartCoroutine(ShowTimer());
+            StartCoroutine(ShowTimer(time));
         }
 
         internal void Hide()

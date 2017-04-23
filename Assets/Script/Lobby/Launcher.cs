@@ -210,7 +210,7 @@ namespace com.Lobby
         /// <returns></returns>
         IEnumerator ExitRoom()
         {
-            roomPanel.transform.DOScaleY(0, 1f);
+            roomPanel.transform.DOScaleY(0, 0.8f);
             PhotonNetwork.LeaveRoom();
 
             yield return new WaitForSeconds(1f);
@@ -223,7 +223,7 @@ namespace com.Lobby
         /// <returns></returns>
         IEnumerator GetInRoom()
         {
-            lobbyPanel.transform.DOScaleY(0, 1f);
+            lobbyPanel.transform.DOScaleY(0,.8f);
             yield return new WaitForSeconds(1f);
             roomPanel.transform.DOScaleY(1, 1f);
         }

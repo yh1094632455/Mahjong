@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Game.unity
+- path: Assets/Scene/Lancher.unity
   isLoaded: 1
   isActive: 1

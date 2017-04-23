@@ -139,7 +139,6 @@ namespace Script.Login
             try
             {
                 peer.Disconnect();
-                peer.StopThread();
             }
             catch (Exception e)
             {

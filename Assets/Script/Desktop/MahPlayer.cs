@@ -71,9 +71,6 @@ namespace com.Desktop
         //玩家昵称
         public Text playerName;
 
-        //具有行动权
-        public bool activable = false;
-
         //与PhotonPlayer中的玩家关联
         public PhotonPlayer photonPlayer;
 
@@ -115,8 +112,8 @@ namespace com.Desktop
         public Button btnWin;
         public Button btnGang;
         public Button btnpass;
+        public Button btnpass1;
 
-        public Timer timer;
         #endregion 
 
         private void Start()
@@ -146,60 +143,15 @@ namespace com.Desktop
             btnGang.onClick.AddListener(delegate () { Gang(); });
 
             btnpass.onClick.RemoveAllListeners();
-            btnpass.onClick.AddListener(delegate () { Pass(); });
-        }
+            btnpass.onClick.AddListener(delegate () { Pass(0); });
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void Update()
-        {
+            btnpass1.onClick.RemoveAllListeners();
+            btnpass1.onClick.AddListener(delegate () { Pass(1); });
 
-            if (state == STATE.playing || activable)
-            {
-                if (timer.image.IsActive())
-                {
-                    return;
-                }
-
-                int[] param = { photonPlayer.ID };
-                photonView.RPC("ShowTimer", PhotonTargets.All, param);
-            }
-
-            if (activable)
-            {
-                abandonMah = GameManager.Instance.abandonMah;
-
-                if (abandonMah.player.photonPlayer.ID == photonPlayer.ID)
-                {
-                    //下一位玩家取牌
-                    PhotonNetwork.RaiseEvent(NEXTPLAYERGETMAH, null, true, null);
-                }
-                else
-                {
-                    bool isCanWin = MahJongTools.IsCanHU(keepedMah, abandonMah.ID);
-                    bool isCanPon = MahJongTools.IsCanPon(keepedMah, abandonMah.ID, state);
-                    bool isCanGang = MahJongTools.IsCanGang(keepedMah, abandonMah.ID, state);
-
-                    btnWin.gameObject.SetActive(isCanWin);
-                    btnPon.gameObject.SetActive(isCanPon);
-                    btnGang.gameObject.SetActive(isCanGang);
-
-                    if (!isCanWin && !isCanPon && !isCanGang)
-                    {
-                        // 行动权交给下一个玩家
-                        PhotonNetwork.RaiseEvent(ACTIVENEXT, null, true, null);
-                    }
-                    else
-                    {
-                        btnpass.gameObject.SetActive(true);
-                    }
-                }
-                //行动完
-                activable = false;
-            }
+            HideMenu();
 
         }
+
 
         /// <summary>
         /// 显示自己的牌
@@ -245,8 +197,9 @@ namespace com.Desktop
         /// </summary>
         public void GetMahJong(bool isfirst)
         {
-            activable = false;
             int GotID = GameManager.Instance.GetMahjong(isfirst);
+
+            bool isZimo = MahJongTools.IsCanHU(keepedMah, GotID);
 
             keepedMah.Add(GotID);
 
@@ -262,10 +215,16 @@ namespace com.Desktop
 
             gotMah = mah;
             state = STATE.playing;
+
+            if (isZimo)
+            {
+                btnWin.gameObject.SetActive(isZimo);
+                btnpass.gameObject.SetActive(true);
+            }
         }
 
         /// <summary>
-        /// 将渠道的牌按照顺序插入
+        /// 将取得的牌按照顺序插入
         /// </summary>
         void SetGotMahPosition()
         {
@@ -463,14 +422,21 @@ namespace com.Desktop
         /// <summary>
         /// 过
         /// </summary>
-        public void Pass()
+        public void Pass(int Type)
         {
             if (!photonPlayer.IsLocal)
             {
                 return;
             }
-            PhotonNetwork.RaiseEvent(ACTIVENEXT, null, true, null);
-            HideMenu();
+            if (Type == 0)
+            {
+                PhotonNetwork.RaiseEvent(ACTIVENEXT, null, true, null);
+                HideMenu();
+            }
+            if (Type == 1)
+            {
+                HideMenu();
+            }
         }
 
         /// <summary>
@@ -482,6 +448,7 @@ namespace com.Desktop
             btnWin.gameObject.SetActive(false);
             btnGang.gameObject.SetActive(false);
             btnpass.gameObject.SetActive(false);
+            btnpass1.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -490,7 +457,38 @@ namespace com.Desktop
         /// <param name="abandonMahID">被打出去的牌</param>
         public void ActiveNext()
         {
-            nextPlayer.activable = true;
+            nextPlayer.Active();
+        }
+
+        private void Active()
+        {
+            abandonMah = GameManager.Instance.abandonMah;
+
+            if (abandonMah.player.photonPlayer.ID == photonPlayer.ID)
+            {
+                //下一位玩家取牌
+                PhotonNetwork.RaiseEvent(NEXTPLAYERGETMAH, null, true, null);
+            }
+            else
+            {
+                bool isCanWin = MahJongTools.IsCanHU(keepedMah, abandonMah.ID);
+                bool isCanPon = MahJongTools.IsCanPon(keepedMah, abandonMah.ID, state);
+                bool isCanGang = MahJongTools.IsCanGang(keepedMah, abandonMah.ID, state);
+
+                btnWin.gameObject.SetActive(isCanWin);
+                btnPon.gameObject.SetActive(isCanPon);
+                btnGang.gameObject.SetActive(isCanGang);
+
+                if (!isCanWin && !isCanPon && !isCanGang)
+                {
+                    // 行动权交给下一个玩家
+                    PhotonNetwork.RaiseEvent(ACTIVENEXT, null, true, null);
+                }
+                else
+                {
+                    btnpass.gameObject.SetActive(true);
+                }
+            }
         }
 
         /// <summary>
@@ -501,7 +499,6 @@ namespace com.Desktop
         /// <param name="senderId">发送者</param>
         private void OnEventCall(byte eventCode, object content, int senderId)
         {
-            timer.Hide();
 
             #region 过滤条件  找到自己在其他客户端上的投影玩家
             if (photonPlayer.ID != senderId)
@@ -522,7 +519,6 @@ namespace com.Desktop
 
             if (eventCode == ACTIVENEXT || eventCode == NEXTPLAYERGETMAH)
             {
-                nextPlayer.timer.Show();
             }
             #endregion
 
@@ -530,14 +526,11 @@ namespace com.Desktop
             if (eventCode == DAPAICODE)
             {
                 int mahID = (int)content;
+
+                Debug.Log(photonPlayer.Get(senderId).NickName + "打牌 " + mahID);
                 MahJongObject mahObj = Abandan(mahID);
 
                 GameManager.Instance.abandonMah = mahObj;
-                if (!nextPlayer.photonPlayer.IsLocal)
-                {
-                    return;
-                }
-                ActiveNext();
             }
 
             #endregion
@@ -545,6 +538,7 @@ namespace com.Desktop
             #region 碰牌
             if (eventCode == PONMAH)
             {
+                Debug.Log("碰牌 ");
                 Pon();
             }
             #endregion
@@ -552,6 +546,7 @@ namespace com.Desktop
             #region 杠牌
             if (eventCode == GANGPAI)
             {
+                Debug.Log("杠牌 ");
                 Gang();
             }
 
@@ -563,6 +558,10 @@ namespace com.Desktop
                 return;
             }
             #endregion
+            if (eventCode == DAPAICODE)
+            {
+                ActiveNext();
+            }
 
             #region 下一个玩家行动
             if (eventCode == ACTIVENEXT)

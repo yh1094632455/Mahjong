@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace com.Desktop
@@ -26,6 +27,8 @@ namespace com.Desktop
         /// 所有玩家的集合
         /// </summary>
         public List<MahPlayer> players;
+
+        public GameObject[] panels;
 
         /// <summary>
         /// 麻将牌
@@ -53,13 +56,14 @@ namespace com.Desktop
         /// </summary>
         private byte DEALINGCODE = 10;
         private byte GETMAHCODE = 11;
+        private byte ONEMORETIME = 12;
         #endregion
+
         private void Awake()
         {
             if (_instance == null)
             {
                 _instance = this;
-                DontDestroyOnLoad(this);
             }
             else
             {
@@ -178,6 +182,10 @@ namespace com.Desktop
             {
                 if (p.IsMasterClient)
                 {
+                    PhotonNetwork.player.mahPlayer.abandanedMah.Clear();
+                    PhotonNetwork.player.mahPlayer.keepedMah.Clear();
+                    PhotonNetwork.player.mahPlayer.ponMah.Clear();
+
                     //主机调用自己的方法
                     for (int j = 0; j < 13; j++)
                     {
@@ -241,6 +249,8 @@ namespace com.Desktop
             OverPanel.gameObject.SetActive(true);
         }
 
+        /*
+         * 
         [PunRPC]
         void ShowTimer(int[] param)
         {
@@ -253,6 +263,7 @@ namespace com.Desktop
             photonPlayer.mahPlayer.timer.time = 10;
             photonPlayer.mahPlayer.timer.Show();
         }
+         */
 
         [PunRPC]
         void WinPai(int[] param)
@@ -264,7 +275,6 @@ namespace com.Desktop
 
             text.text = "玩家" + photonPlayer.NickName + " 胡牌了!";
         }
-
 
         private MahPlayer NextPlayer(MahPlayer playerE)
         {
@@ -293,6 +303,10 @@ namespace com.Desktop
             //发牌
             if (eventcode == DEALINGCODE)
             {
+                PhotonNetwork.player.mahPlayer.abandanedMah.Clear();
+                PhotonNetwork.player.mahPlayer.keepedMah.Clear();
+                PhotonNetwork.player.mahPlayer.ponMah.Clear();
+
                 List<int> mahs = new List<int>((int[])content);
                 PhotonNetwork.player.mahPlayer.keepedMah = mahs;
                 PhotonNetwork.player.mahPlayer.ShowUI();
@@ -302,12 +316,70 @@ namespace com.Desktop
                     mahJong.allMah.RemoveAt(0);
                 }
             }
+
+            if (eventcode == ONEMORETIME)
+            {
+                OneMoreMahjong();
+            }
+        }
+
+        public void OneMoreMahjong()
+        {
+            //只有主机有发牌的权利
+            if (!PhotonNetwork.isMasterClient)
+            {
+                Text text = OverPanel.GetComponentInChildren<Text>();
+                text.text = "等待房主确认...";
+
+                return;
+            }
+
+            photonView.RPC("OneMore", PhotonTargets.All, null);
+        }
+
+        [PunRPC]
+        private void OneMore()
+        {
+            OverPanel.gameObject.SetActive(false);
+
+            RestView();
+
+            //只有主机有发牌的权利
+            if (!PhotonNetwork.isMasterClient)
+            {
+                return;
+            }
+
+            //洗牌
+            ShuffleMah();
+
+            //摇骰子
+            Dice();
+
+            //发牌
+            DealingMahs();
+
+            //玩家取牌
+            players[0].GetMahJong(true);
+
+        }
+
+        private void RestView()
+        {
+            foreach (GameObject p in panels)
+            {
+                MahJongObject[] m_p = p.GetComponentsInChildren<MahJongObject>();
+                foreach (MahJongObject m_o in m_p)
+                {
+                    DestroyObject(m_o.gameObject);
+                }
+            }
         }
 
         public void Back()
         {
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("Game");
+            SceneManager.LoadScene("Game");
         }
 
     }
